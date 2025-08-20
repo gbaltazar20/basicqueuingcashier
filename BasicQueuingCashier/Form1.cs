@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,25 @@ namespace BasicQueuingCashier
 {
     public partial class QueuingForm : Form
     {
+        CashierWindowQueueForm queueForm = new CashierWindowQueueForm();
+        private CashierClass cashier;
         public QueuingForm()
         {
             InitializeComponent();
+            cashier = new CashierClass();
+            queueForm.Show();
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCashier_Click(object sender, EventArgs e)
+        {
+            lblQueue.Text = cashier.CashierGeneratedNumber("P - ");
+            CashierClass.getNumberInQueue = lblQueue.Text;
+            CashierClass.CashierQueue.Enqueue(CashierClass.getNumberInQueue);
         }
     }
 }
